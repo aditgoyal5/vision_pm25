@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Model checkpoints
+*.pth
+*.pt
+
+# Large datasets
+train/
+test/
+datasets/
+*.zip
+*.tar
+*.onnx
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+

@@ -318,15 +318,14 @@ This is the picure of the apparatus just exposed to smoke.
 
 ## Flask Upload Interface
 
-*Add screenshots of the web interface here.*
+<img width="625" height="441" alt="image" src="https://github.com/user-attachments/assets/46203f53-b2f3-4d21-bbf3-b689c7df4465" />
+<img width="612" height="98" alt="image" src="https://github.com/user-attachments/assets/d0bb005a-1618-44d0-8297-269dca441405" />
 
-## Sample Predictions
+Now after clicking Predict, we get the predicted value as well as automatically updated calibrated mapping of the new prediction with the shown value (actual reading) entered by the user.
 
-*Add inference examples and outputs here.*
+<img width="366" height="123" alt="image" src="https://github.com/user-attachments/assets/2f9fb778-a020-448a-88e9-3830eeb4d8c2" />
 
-## Deployment on Arduino UNO Q
-
-*Add UNO Q runtime/setup images here.*
+*The flask server automatically initialises along with the PMS5003 sensor, as soon as the UNO Q is powered on*
 
 
 ## Problems Faced
@@ -335,7 +334,9 @@ This is the picure of the apparatus just exposed to smoke.
 2) **Dataset quality and Synchronization** : PM values collected from external sources, there were cases where timestamps did not perfectly align. This introduced noisy labels into the dataset, which directly affected model training quality. To improve this, timestamp-based logging and structured CSV files were implemented so that each image could be associated more accurately with its corresponding PM reading. Despite these improvements, the project still lacked a very large, clean, and perfectly synchronized dataset collected under controlled conditions, limiting the overall reliability of the model. Moreover, another major issue was that the dataset was filled with non-sky elements- which warrented for proper cleaning of the each of the dataset images along with preservation of actual valuable information which turned out to be difficult.
 
 3) **Reliability (of the data points and of the calibration based approach as a whole)** : The project also encountered challenges related to validation and scientific reliability. Although prediction outputs could visually appear reasonable, it was difficult to conclusively prove that the model generalized well across different weather conditions, locations, seasons, and camera settings. The system performed best under conditions similar to the training data, but there was still uncertainty regarding how reliably it would function in completely new environments.
-Another major issue faced during the project was the calibration-mapping based correction approach itself, which turned out to be fundamentally flawed as an attempt at reinforcement-style improvement. The idea was to continuously map predicted PM2.5 values against actual PM readings and use those corrections to improve future predictions over time. Initially, this appeared promising because it reduced some short-term prediction fluctuations. However, the system was not truly learning environmental features in a robust way; instead, it was gradually becoming dependent on historical correction patterns. This remained one of the largest unresolved concerns in the project. 
+Another major issue faced during the project was the calibration-mapping based correction approach itself, which turned out to be fundamentally flawed as an attempt at reinforcement-style improvement. The idea was to continuously map predicted PM2.5 values against actual PM readings and use those corrections to improve future predictions over time. Initially, this appeared promising because it reduced some short-term prediction fluctuations. However, the system was not truly learning environmental features in a robust way; instead, it was gradually becoming dependent on historical correction patterns. This remained one of the largest unresolved concerns in the project.
+
+4) Another small but notable issue was the bugs encountered while using Arduino UNO Q. Since the board is quite new, its software interfacing is quite buggy. The Arduino App Lab has limited functionality when it comes to using SSH based commands. It performs poorly and refuses to cooperate with the SSH. I initially wanted to auto-capture the actual PM value instead of asking the user to manually enter it, since it is already being displayed on the LED matrix of the UNO Q. However, this was not possible since the UNO Q's firmware refused to cooperate. Arduino App Lab refused to harmonise the python code on the app lab and on the board itself. It was as if both were clashing with each other. I tried looking for solutions but when I made my project in April 2026, no fixes for this were present. Hence I made my own fix for the time being. I'm sure that as more people use Arduino UNO Q, bugs like these would be fixed and interfacing python from multiple points (app lab as well as SSH) would be more compatible with each other. 
 
 # Repository Notes
 

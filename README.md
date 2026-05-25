@@ -257,26 +257,9 @@ Basically here what I'm doing is im manually entering the real world measurement
 
 
 # Why This Project is Different
+This project is different because I'm trying to do this in quite an unorthodox manner. First of what I'm attempting to do is in itself called reduandant by some. I'm attempting to map images to PM values such that we would in the future be able to predict PM just using an image of the sky. How cool does that sound? 
 
-Most ML air-quality projects stop at:
-
-* dataset training
-* offline inference
-* notebook demonstrations
-
-This project focuses heavily on:
-
-* embedded deployment
-* edge inference
-* real-time operation
-* calibration systems
-* Linux + MCU integration
-* mobile accessibility
-* hardware/software co-design
-
-The emphasis is not just on model accuracy, but on creating a deployable environmental sensing system.
-
-
+Moreover, this project is also different because here accuracy is off the charts. The funny thing is that its TERRIBLE. Its around 50% when using classification with bins with defined values. However, my strategy of mapping values as discussed earlier and is apparent in some of the nano_server3 code, is something that I've looked at. Although it is a method that wouldn't be considered the best, it is something that I've thought of as a quick and comparitively easy fix. 
 
 # Current Capabilities
 
@@ -311,7 +294,7 @@ The emphasis is not just on model accuracy, but on creating a deployable environ
 * STM32U585
 * Qualcomm Dragonwing QRB2210
 
-\---
+
 
 # Results
 
@@ -323,14 +306,15 @@ The project successfully demonstrates:
 * adaptive calibration workflow
 * mobile-accessible inference pipeline
 
-\---
 
 
 # Images
 
 ## System Setup
 
-*Add hardware setup images here.*
+<img width="571" height="428" alt="IMG_8098" src="https://github.com/user-attachments/assets/d6e3bec2-f513-46e9-9470-7fa5489f53e2" />
+
+This is the picure of the apparatus just exposed to smoke. 
 
 ## Flask Upload Interface
 
@@ -344,12 +328,15 @@ The project successfully demonstrates:
 
 *Add UNO Q runtime/setup images here.*
 
-\---
-# Future Improvements
+
 ## Problems Faced
+1) **High Sensitivity to Enviromental Conditions** : The model predictions were highly sensitive to environmental conditions rather than just pollution levels. Changes in lighting, cloud cover, sky brightness, and time of day significantly affected the output. In many cases, the model could confuse a cloudy or overexposed sky with high pollution conditions. To reduce this issue, calibration mechanisms were introduced where predicted PM values and actual PM values were stored together and correction logic was applied over time. Historical predictions and nonlinear calibration approaches were also explored to stabilize the outputs. However, the project could still not fully solve the fundamental issue of ensuring that the model was truly learning PM2.5 characteristics instead of indirectly learning lighting and atmospheric visual patterns.
+   
+2) **Dataset quality and Synchronization** : PM values collected from external sources, there were cases where timestamps did not perfectly align. This introduced noisy labels into the dataset, which directly affected model training quality. To improve this, timestamp-based logging and structured CSV files were implemented so that each image could be associated more accurately with its corresponding PM reading. Despite these improvements, the project still lacked a very large, clean, and perfectly synchronized dataset collected under controlled conditions, limiting the overall reliability of the model. Moreover, another major issue was that the dataset was filled with non-sky elements- which warrented for proper cleaning of the each of the dataset images along with preservation of actual valuable information which turned out to be difficult.
 
+3) **Reliability (of the data points and of the calibration based approach as a whole)** : The project also encountered challenges related to validation and scientific reliability. Although prediction outputs could visually appear reasonable, it was difficult to conclusively prove that the model generalized well across different weather conditions, locations, seasons, and camera settings. The system performed best under conditions similar to the training data, but there was still uncertainty regarding how reliably it would function in completely new environments.
+Another major issue faced during the project was the calibration-mapping based correction approach itself, which turned out to be fundamentally flawed as an attempt at reinforcement-style improvement. The idea was to continuously map predicted PM2.5 values against actual PM readings and use those corrections to improve future predictions over time. Initially, this appeared promising because it reduced some short-term prediction fluctuations. However, the system was not truly learning environmental features in a robust way; instead, it was gradually becoming dependent on historical correction patterns. This remained one of the largest unresolved concerns in the project. 
 
-\---
 # Repository Notes
 
 Large model files such as:
@@ -368,7 +355,6 @@ The repository focuses on:
 * training workflow
 * reproducibility
 
-\---
 
 # Author
 

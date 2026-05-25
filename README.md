@@ -257,7 +257,7 @@ Basically here what I'm doing is im manually entering the real world measurement
 
 
 # Why This Project is Different
-This project is different because I'm trying to do this in quite an unorthodox manner. First of what I'm attempting to do is in itself called reduandant by some. I'm attempting to map images to PM values such that we would in the future be able to predict PM just using an image of the sky. How cool does that sound? 
+This project is different because I'm trying to do this in a slightly unorthodox manner. Although what I was attempting to do was being called reduandant by some, I still decided to go ahead with it. I'm attempting to map images to PM values such that we would in the future, be able to predict PM just using an image of the sky. How cool does that sound? 
 
 Moreover, this project is also different because here accuracy is off the charts. The funny thing is that its TERRIBLE. Its around 50% when using classification with bins with defined values. However, my strategy of mapping values as discussed earlier and is apparent in some of the nano_server3 code, is something that I've looked at. Although it is a method that wouldn't be considered the best, it is something that I've thought of as a quick and comparitively easy fix. 
 

@@ -1,7 +1,10 @@
 
 # Vision-Based PM2.5 Estimation using Arduino UNO Q
+<img width="402" height="304" alt="IMG_8229" src="https://github.com/user-attachments/assets/ee7b2eed-7084-45ec-8639-502211d8a7f1" />
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/d469ef75-ae6f-4430-bd58-5ca0344f9f08" />
 
-## Overview
+
+## Overview 
 
 This project is a real-time edge-AI system designed to estimate **PM2.5 concentration directly from environmental images** using computer vision and deep learning.
 
@@ -25,7 +28,7 @@ The system provides a complete edge-AI pipeline:
 4. Calibrate prediction using real-world measurements
 5. Return refined PM estimate through a Flask web interface
 
-\---
+***PICTURES AND DETAILED EXPLANATION OF PROBLEMS and SOLUTIONS are listed TOWARDS THE END of this readME file.***
 
 # Motivation
 
@@ -43,11 +46,8 @@ The goal is to create a:
 * low-cost
 * scalable
 * edge-deployable
-* AI-driven environmental monitoring system
+* AI-driven environmental monitoring system capable of running directly on embedded hardware.
 
-capable of running directly on embedded hardware.
-
-\---
 
 # Key Features
 
@@ -62,7 +62,6 @@ capable of running directly on embedded hardware.
 * Calibration logging and refinement
 * Mobile-accessible inference interface
 
-\---
 
 # Hardware Platform
 
@@ -94,7 +93,7 @@ The STM32 MCU side handles:
 * Arduino sketch execution
 * low-level interfacing
 
-\---
+
 
 # System Architecture
 
@@ -114,9 +113,9 @@ The STM32 MCU side handles:
             Final PM2.5 Estimate
 ```
 
-\---
 
-# Hybrid Linux + MCU Architecture
+
+# Hybrid Linux + MCU Architecture [UNO Q]
 
 ```text
 Linux MPU Side (Python)
@@ -134,7 +133,6 @@ STM32 MCU Side (Arduino Sketch)
     └── Real-Time Operations
 ```
 
-\---
 
 # Project Structure
 
@@ -151,13 +149,8 @@ VISION\_PM25/
 │   └── unoq\_app/
 │       ├── python/
 │       │   └── main.py
-│       │
 │       ├── sketch/
 │           └── sketch.ino
-│       
-│       
-│       
-│
 ├── training/
 │   ├── train\_convnext\_regression.py
 │   ├── train\_mobilenet.py
@@ -181,7 +174,6 @@ VISION\_PM25/
 └── README.md
 ```
 
-\---
 
 # Machine Learning Pipeline
 
@@ -195,8 +187,8 @@ The project experiments with multiple regression architectures:
 * Multi-task learning models
 
 The objective is to map image features to PM2.5 concentration values.
-
-\---
+Although I explored multiple regression and classification models, regression worked best for this project. 
+Accuracy is one of the major problems that I faced, which I'll address later. 
 
 # ONNX Deployment
 
@@ -212,7 +204,6 @@ Why ONNX:
 
 Inference is performed locally on the UNO Q without cloud dependency.
 
-\---
 
 # Flask Upload Interface
 
@@ -226,10 +217,9 @@ The system includes a Flask-based web server that allows:
 Workflow:
 
 ```text
-Phone Upload → Flask Server → ONNX Inference → Calibration → PM Output
+Phone Upload → Flask Server → ONNX Inference → Calibration (to improve accuracy) → PM Output
 ```
 
-\---
 
 # Calibration System
 
@@ -247,6 +237,7 @@ inside:
 calibration\_data.csv
 ```
 
+
 This allows the system to:
 
 * refine predictions
@@ -262,7 +253,8 @@ timestamp,predicted\_pm,actual\_pm
 1775288786,126.67,48
 ```
 
-\---
+Basically here what I'm doing is im manually entering the real world measurements and mapping that to the predicted value. This would ensure better predictions- more accurate ones in the future, but I do realize that this method would require exposure and multiple rounds of testings in different environments in locations all over the world to make this system accurate and scalable. This indeed is one of the major flaws of this project.
+
 
 # Why This Project is Different
 
@@ -284,7 +276,7 @@ This project focuses heavily on:
 
 The emphasis is not just on model accuracy, but on creating a deployable environmental sensing system.
 
-\---
+
 
 # Current Capabilities
 
@@ -295,23 +287,6 @@ The emphasis is not just on model accuracy, but on creating a deployable environ
 * Log prediction history
 * Operate without cloud inference
 
-\---
-
-# Future Improvements
-
-## Planned Enhancements
-
-* Real-time camera streaming
-* Automatic retraining pipeline
-* Sensor fusion with physical PM sensors
-* Temporal sequence modeling
-* Live environmental dashboard
-* GPU/OpenCL acceleration
-* Continuous calibration optimization
-* MQTT/LoRa telemetry integration
-* Mobile application interface
-
-\---
 
 # Technologies Used
 
@@ -350,6 +325,7 @@ The project successfully demonstrates:
 
 \---
 
+
 # Images
 
 ## System Setup
@@ -369,7 +345,11 @@ The project successfully demonstrates:
 *Add UNO Q runtime/setup images here.*
 
 \---
+# Future Improvements
+## Problems Faced
 
+
+\---
 # Repository Notes
 
 Large model files such as:

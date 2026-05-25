@@ -361,6 +361,7 @@ The repository focuses on:
 Adit Goyal
 
 Electronics and Communication Engineering
-Made for Ai/ML Course Project (January - April 2026)
+
+This project was partly developed for my Ai/ML Course (January - April 2026)
 
 

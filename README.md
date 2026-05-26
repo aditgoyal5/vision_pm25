@@ -134,47 +134,6 @@ STM32 MCU Side (Arduino Sketch)
 ```
 
 
-# Project Structure
-
-```text
-VISION\_PM25/
-│
-├── deployment/
-│   ├── server/
-│   │   ├── nano\_server.py
-│   │   ├── run\_model\_onnx.py
-│   │   ├── calibration\_data.csv
-│   │   └── predicted\_pm.txt
-│   │
-│   └── unoq\_app/
-│       ├── python/
-│       │   └── main.py
-│       ├── sketch/
-│           └── sketch.ino
-├── training/
-│   ├── train\_convnext\_regression.py
-│   ├── train\_mobilenet.py
-│   ├── train\_hybrid.py
-│   ├── export\_onnx.py
-│   └── evaluate\_regression.py
-│
-├── models/
-│   ├── convnext\_regression.py
-│   ├── mobilenet\_regression.py
-│   ├── multitask\_model.py
-│   └── hybrid\_model.py
-│
-├── features/
-│   └── physics\_features.py
-│
-├── evaluation/
-├── pm25vision/
-├── data/
-├── requirements.txt
-└── README.md
-```
-
-
 # Machine Learning Pipeline
 
 ## Models Explored
